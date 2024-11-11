@@ -63,15 +63,6 @@ const frameIn = [
           auth: true
         },
         component: _import('core/versionRecord')
-      },
-      {
-        path: 'serverStatus',
-        name: 'ServerStatus',
-        meta: {
-          title: '服务状态',
-          auth: true
-        },
-        component: _import('core/serverStatus')
       }
     ]
   }

@@ -1,5 +1,10 @@
 <template>
   <d2-container>
+    <template slot="header">
+      <div style="text-align: right">
+        <el-button type="primary" @click="queryPage(1, pageSize)">刷新</el-button>
+      </div>
+    </template>
     <el-table
       :data="tableData"
       height="520"
@@ -93,7 +98,9 @@ export default {
         type: 'warning'
       }).then(() => {
         _this.doRollback(row)
-        _this.queryPage(1, this.pageSize)
+        setTimeout(function () {
+          _this.queryPage(1, _this.pageSize)
+        }, 1000)
       }).catch(() => {
       })
     },

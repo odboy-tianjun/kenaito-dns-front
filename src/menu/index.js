@@ -42,5 +42,4 @@ export const menuAside = supplementPath([
   // }
   { path: '/resolveRecord', title: '解析记录', icon: 'fa-solid fa-compass' },
   { path: '/versionRecord', title: '版本记录', icon: 'fa-solid fa-compass' },
-  { path: '/serverStatus', title: '服务状态', icon: 'fa-solid fa-compass' }
 ])
