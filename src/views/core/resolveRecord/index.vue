@@ -192,7 +192,7 @@ export default {
           }
         ]
       },
-      formPlaceholderType: 'A',
+      formPlaceholderType: '',
       formPlaceholderMap: {
         A: '请填写IPv4地址, 如：192.168.235.100',
         AAAA: '请填写IPv6地址, 如：ff03:0:0:0:0:0:0:c1',
@@ -261,7 +261,7 @@ export default {
       this.formPlaceholderType = val
     },
     handleCreateClick () {
-      this.createFormModel = this.createFormDefaultModel
+      this.createFormModel = { ...this.createFormDefaultModel }
       this.createFormVisible = true
     },
     async doCreate () {
