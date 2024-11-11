@@ -64,5 +64,16 @@ export default ({ service, request, faker, tools }) => ({
       method: 'post',
       data
     })
+  },
+  /**
+   * @description 分页查询变更历史记录
+   * @param {Object} data
+   */
+  CORE_QUERY_VERSION_PAGE (data = {}) {
+    return request({
+      url: '/queryVersionPage',
+      method: 'post',
+      data
+    })
   }
 })
