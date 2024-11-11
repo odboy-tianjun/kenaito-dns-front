@@ -75,5 +75,16 @@ export default ({ service, request, faker, tools }) => ({
       method: 'post',
       data
     })
+  },
+  /**
+   * @description 分页查询变更历史记录
+   * @param {Object} data
+   */
+  CORE_ROLLBACK (data = {}) {
+    return request({
+      url: '/rollback',
+      method: 'post',
+      data
+    })
   }
 })

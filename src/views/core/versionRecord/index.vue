@@ -29,7 +29,7 @@
         label="操作"
         width="160">
         <template slot-scope="scope">
-          <el-button @click="handleRemoveClick(scope.row)" type="text" size="small" :disabled="scope.row.isRelease === 1">回滚</el-button>
+          <el-button @click="handleRollbackClick(scope.row)" type="text" size="small" :disabled="scope.row.isRelease === 1">回滚</el-button>
         </template>
       </el-table-column>
     </el-table>
@@ -85,41 +85,23 @@ export default {
       this.pageSize = pageSize
       this.queryPage(1, this.pageSize)
     },
-    async handleTestClick (row) {
-      const res = await api.CORE_TEST_HOSTNAME(row)
-      if (res.code === 0) {
-        Message.success(res.message)
-      }
-    },
-    handleModifyClick (row) {
-      this.modifyFormModel = { ...row, type: row.recordType }
-      this.modifyFormVisible = true
-    },
-    async doModify () {
-      const res = await api.CORE_MODIFY(this.modifyFormModel)
-      if (res.code === 0) {
-        Message.success(res.message)
-        this.onSearchFormSubmit()
-        this.modifyFormVisible = false
-      }
-    },
-    handleRemoveClick (row) {
+    handleRollbackClick (row) {
       const _this = this
-      _this.$confirm('确认删除选中的解析记录, 是否继续?', '确认删除', {
+      _this.$confirm('确认回滚选中的版本记录, 是否继续?', '确认回滚', {
         confirmButtonText: '确定',
         cancelButtonText: '取消',
         type: 'warning'
       }).then(() => {
-        _this.doDelete(row)
+        _this.doRollback(row)
+        _this.queryPage(1, this.pageSize)
       }).catch(() => {
       })
     },
-    async doDelete (row) {
-      const res = await api.CORE_DELETE({ ...row, type: row.recordType })
+    async doRollback (row) {
+      const res = await api.CORE_ROLLBACK({ ...row })
       if (res.code === 0) {
         Message.success(res.message)
         this.onSearchFormSubmit()
-        this.modifyFormVisible = false
       }
     }
   }
