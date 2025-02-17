@@ -51,12 +51,19 @@
         label="记录值">
       </el-table-column>
       <el-table-column
+        prop="description"
+        label="备注"
+        width="120"
+      >
+      </el-table-column>
+      <el-table-column
         prop="enabled"
         label="是否启用"
         width="100"
       >
         <template slot-scope="scope">
-          <el-switch :value="scope.row.enabled === 1" @change="(val)=>onTableRowEnabledChange(val, scope.row)"></el-switch>
+          <el-switch :value="scope.row.enabled === 1"
+                     @change="(val)=>onTableRowEnabledChange(val, scope.row)"></el-switch>
         </template>
       </el-table-column>
       <el-table-column
@@ -96,7 +103,8 @@
     <el-dialog title="新增解析记录" :visible.sync="createFormVisible" width="600px">
       <el-form :model="createFormModel" ref="saveForm" :rules="formRules">
         <el-form-item label="记录类型" label-width="120px" prop="type">
-          <el-select v-model="createFormModel.type" placeholder="请选择记录类型" style="width: 75%" @change="onFormModelTypeChange">
+          <el-select v-model="createFormModel.type" placeholder="请选择记录类型" style="width: 75%"
+                     @change="onFormModelTypeChange">
             <el-option label="A - 将域名解析指向一个IPv4地址" value="A"></el-option>
             <el-option label="AAAA - 将域名解析指向一个IPv6地址" value="AAAA"></el-option>
             <el-option label="CNAME - 将域名解析指向另一个域名" value="CNAME"></el-option>
@@ -105,13 +113,20 @@
           </el-select>
         </el-form-item>
         <el-form-item label="主机记录" label-width="120px" prop="name">
-          <el-input v-model="createFormModel.name" autocomplete="off" style="width: 75%" placeholder="请填写主机记录, 如：demo.odboy.com"></el-input>
+          <el-input v-model="createFormModel.name" autocomplete="off" style="width: 75%"
+                    placeholder="请填写主机记录, 如：demo.odboy.com"></el-input>
         </el-form-item>
         <el-form-item label="TTL" label-width="120px" prop="ttl">
-          <el-input-number v-model="createFormModel.ttl" :min="10" :max="1440" :step="1" step-strictly style="width: 75%"></el-input-number>
+          <el-input-number v-model="createFormModel.ttl" :min="10" :max="1440" :step="1" step-strictly
+                           style="width: 75%"></el-input-number>
         </el-form-item>
         <el-form-item label="记录值" label-width="120px" prop="value">
-          <el-input v-model="createFormModel.value" autocomplete="off" style="width: 75%" :placeholder="formPlaceholderMap[formPlaceholderType]"></el-input>
+          <el-input v-model="createFormModel.value" autocomplete="off" style="width: 75%"
+                    :placeholder="formPlaceholderMap[formPlaceholderType]"></el-input>
+        </el-form-item>
+        <el-form-item label="备注" label-width="120px" prop="value">
+          <el-input v-model="createFormModel.description" autocomplete="off" style="width: 75%"
+                    placeholder="请输入备注"></el-input>
         </el-form-item>
       </el-form>
       <div slot="footer" class="dialog-footer">
@@ -122,7 +137,8 @@
     <el-dialog title="修改解析记录" :visible.sync="modifyFormVisible" width="600px">
       <el-form :model="modifyFormModel" ref="saveForm" :rules="formRules">
         <el-form-item label="记录类型" label-width="120px" prop="type">
-          <el-select v-model="modifyFormModel.type" placeholder="请选择记录类型" style="width: 75%" @change="onFormModelTypeChange">
+          <el-select v-model="modifyFormModel.type" placeholder="请选择记录类型" style="width: 75%"
+                     @change="onFormModelTypeChange">
             <el-option label="A - 将域名解析指向一个IPv4地址" value="A"></el-option>
             <el-option label="AAAA - 将域名解析指向一个IPv6地址" value="AAAA"></el-option>
             <el-option label="CNAME - 将域名解析指向另一个域名" value="CNAME"></el-option>
@@ -131,13 +147,20 @@
           </el-select>
         </el-form-item>
         <el-form-item label="主机记录" label-width="120px" prop="name">
-          <el-input v-model="modifyFormModel.name" autocomplete="off" style="width: 75%" placeholder="请填写主机记录, 如：demo.odboy.com"></el-input>
+          <el-input v-model="modifyFormModel.name" autocomplete="off" style="width: 75%"
+                    placeholder="请填写主机记录, 如：demo.odboy.com"></el-input>
         </el-form-item>
         <el-form-item label="TTL" label-width="120px" prop="ttl">
-          <el-input-number v-model="modifyFormModel.ttl" :min="10" :max="1440" :step="1" step-strictly style="width: 75%"></el-input-number>
+          <el-input-number v-model="modifyFormModel.ttl" :min="10" :max="1440" :step="1" step-strictly
+                           style="width: 75%"></el-input-number>
         </el-form-item>
         <el-form-item label="记录值" label-width="120px" prop="value">
-          <el-input v-model="modifyFormModel.value" autocomplete="off" style="width: 75%" :placeholder="formPlaceholderMap[formPlaceholderType]"></el-input>
+          <el-input v-model="modifyFormModel.value" autocomplete="off" style="width: 75%"
+                    :placeholder="formPlaceholderMap[formPlaceholderType]"></el-input>
+        </el-form-item>
+        <el-form-item label="备注" label-width="120px" prop="value">
+          <el-input v-model="modifyFormModel.description" autocomplete="off" style="width: 75%"
+                    placeholder="请输入备注"></el-input>
         </el-form-item>
       </el-form>
       <div slot="footer" class="dialog-footer">
@@ -212,7 +235,8 @@ export default {
         name: '',
         type: '',
         ttl: 10,
-        value: ''
+        value: '',
+        description: ''
       },
       // 修改对话框
       modifyFormVisible: false,

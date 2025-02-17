@@ -18,8 +18,6 @@ kenaito-dns 前端
 
 ## 项目运行
 
-**推荐 node 版本：12-16**
-
 ``` bash
 # 安装依赖
 npm install --registry https://registry.npmmirror.com
